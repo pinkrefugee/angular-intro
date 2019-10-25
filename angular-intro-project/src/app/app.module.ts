@@ -14,6 +14,7 @@ import { SearchAndAddSectionComponent } from './search-and-add-section/search-an
 import { SearchCourseButtonComponent } from './search-course-button/search-course-button.component';
 import { AddCourseButtonComponent } from './add-course-button/add-course-button.component';
 import { SearchCourseInputComponent } from './search-course-input/search-course-input.component';
+import { FormsModule } from '@angular/forms';
 
 @NgModule({
   declarations: [
@@ -32,7 +33,7 @@ import { SearchCourseInputComponent } from './search-course-input/search-course-
     SearchCourseInputComponent
   ],
   imports: [
-    BrowserModule
+    BrowserModule, FormsModule
   ],
   providers: [],
   bootstrap: [AppComponent]
