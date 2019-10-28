@@ -1,0 +1,12 @@
+:host {
+    display: flex;
+    justify-content: center;
+    width: 100%;
+}
+.add-course-button {
+    height: 36px;
+    width: 130px;
+    background-color: #1E90FF;
+    color: white;
+    border: none;
+}

@@ -7,15 +7,8 @@ import { Component, OnInit } from '@angular/core';
 })
 export class SearchCourseInputComponent implements OnInit {
 
-  inputValue: string;
-
   constructor() { }
 
   ngOnInit() {
   }
-
-  onSearchCourseClick() {
-    console.log(this.inputValue);
-  }
-
 }

@@ -1,0 +1,23 @@
+:host {
+    height: 300px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+.search-course-button {
+    height: 48px;
+    width: 100px;
+    background-color: #228B22;
+    color: white;
+    border: none;
+}
+.search-course-input {
+    height: 48px;
+    width: 360px;
+}
+
+.add-course-button {
+    height: 36px;
+    width: 130px;
+    background-color: lightskyblue;
+}

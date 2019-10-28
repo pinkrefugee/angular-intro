@@ -6,10 +6,16 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./search-and-add-section.component.css']
 })
 export class SearchAndAddSectionComponent implements OnInit {
+  
+  inputValue: string;
 
   constructor() { }
 
   ngOnInit() {
+  }
+
+  onSearchCourseClick(): void {
+    console.log(this.inputValue);
   }
 
 }

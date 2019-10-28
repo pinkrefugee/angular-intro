@@ -11,8 +11,5 @@ export class LogoffButtonComponent implements OnInit {
 
   ngOnInit() {
   }
-  onLogoutClick() {
-    console.log('Hqe');
-  }
 
 }
