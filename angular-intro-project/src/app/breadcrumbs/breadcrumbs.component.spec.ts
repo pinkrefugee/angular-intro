@@ -24,7 +24,7 @@ describe('BreadcrumbsComponent', () => {
     expect(component).toBeTruthy();
   });
 
-  it('should reflect Courses in p tag', () => {
+  it('should show "Courses" in <p> tag', () => {
     const itemDe = fixture.debugElement.query(By.css('p'));
     const itemEl = itemDe.nativeElement;
     expect(itemEl.textContent).toEqual('Courses');

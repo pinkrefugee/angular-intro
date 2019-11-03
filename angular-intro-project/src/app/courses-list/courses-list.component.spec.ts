@@ -18,14 +18,19 @@ describe('CoursesListComponent', () => {
   beforeEach(() => {
     fixture = TestBed.createComponent(CoursesListComponent);
     component = fixture.componentInstance;
-    fixture.detectChanges();
   });
 
   it('should create', () => {
     expect(component).toBeTruthy();
   });
 
+  it('should populate', () => {
+    component.ngOnInit();
+    expect(component.items).not.toBeUndefined();
+  });
+
   it('should verify child', () => {
+    fixture.detectChanges();
     const element = fixture.debugElement.query(By.css('app-course-item'));
     expect(element).toBeTruthy();
   });

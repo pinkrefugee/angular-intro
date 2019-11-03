@@ -6,7 +6,7 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./search-section.component.css']
 })
 export class SearchSectionComponent implements OnInit {
-
+  
   inputValue: string;
 
   constructor() { }

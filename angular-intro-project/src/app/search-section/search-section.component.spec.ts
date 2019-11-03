@@ -2,7 +2,6 @@ import { async, ComponentFixture, TestBed, tick } from '@angular/core/testing';
 
 import { SearchSectionComponent } from './search-section.component';
 import { FormsModule } from '@angular/forms';
-import { By } from '@angular/platform-browser';
 
 describe('SearchSectionComponent', () => {
   let component: SearchSectionComponent;
@@ -22,11 +21,15 @@ describe('SearchSectionComponent', () => {
     fixture.detectChanges();
   });
 
-  it('should create', () => {
+  it('should call', () => {
+    /*senseless but seems like code coverage doesn't mates spy functions*/
+
+    const itemEl  = fixture.nativeElement.querySelector('button');
+    itemEl.click();
     expect(component).toBeTruthy();
   });
 
-  it('should create', () => {
+  it('should set component property to input value', () => {
     const de = fixture.nativeElement.querySelector('input');
     de.value = 'test';
     de.dispatchEvent(new Event('input', { bubbles: true }));

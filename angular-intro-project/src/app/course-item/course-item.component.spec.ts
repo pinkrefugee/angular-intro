@@ -3,6 +3,7 @@ import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 import { CourseItemComponent } from './course-item.component';
 import { By } from '@angular/platform-browser';
 import { Component } from '@angular/core';
+import { Course } from '../course';
 
 @Component({
   template: `
@@ -10,13 +11,12 @@ import { Component } from '@angular/core';
 })
 class TestHostComponent {
   value = { id: 'IDDDDD', title: 'TestTitle', creationDate: 'TestCreationDate', duration: 'TestDuration', description: 'TestDescription' };
-  onDeleted(i) { this.id = i };
   id;
+  onDeleted(i) { this.id = i; }
 }
 
 describe('CourseItemComponent', () => {
   let component: CourseItemComponent;
-  // let fixture: ComponentFixture<CourseItemComponent>;
   let fixture;
   let testHost;
   let itemEl;
@@ -41,6 +41,14 @@ describe('CourseItemComponent', () => {
     expect(testHost.id).toBe(testHost.value.id);
   });
 
+  it('should pass id to function', () => {
+    const comp = new CourseItemComponent();
+    const item = new Course('Id2', 'Title2', 'Date2', 'Duration2', 'Description2');
+    comp.item = item;
+
+    comp.itemDeleted.subscribe((id) => expect(id).toBe(comp.item.id));
+    comp.deleteItem(item.id);
+  });
 
   it('should reflect title in component h3 tag', () => {
     fixture = TestBed.createComponent(CourseItemComponent);

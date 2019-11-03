@@ -13,8 +13,25 @@
     background-color: white;
 }
 
-.title-with-info {
+.course-info {
+    width: 70%;
+    margin-left: 50px;
+}
+
+.title-with-info-and-description {
     display: flex;
     justify-content: space-between;
-    width: 900px;
+}
+
+.course-buttons {
+    width: 20%;
+    margin-left: 40px;
+}
+button {
+    width: 70px;
+    height: 30px;
+}
+
+.info {
+    color: lightgray;
 }

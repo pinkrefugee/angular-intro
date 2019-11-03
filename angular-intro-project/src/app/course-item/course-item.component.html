@@ -1,17 +1,17 @@
 <div class='course-container'>
   <div class='course-info'>
-    <div class='title-with-info'>
+    <div class='title-with-info-and-description'>
         <h3>{{item.title}}</h3>
-        <div>
+        <div class='info'>
           {{item.creationDate}}
           {{item.duration}}
         </div>
     </div>    
     {{item.description}}
   </div>
- <div class='course-buttons'>
+ <div class='course-buttons d-flex'>
    <button>Edit</button> 
-   <button class='delete-button' (click)='deleteItem(item.id)'>Delete</button> 
+   <button class='delete-button ml-2' (click)='deleteItem(item.id)'>Delete</button> 
  </div>
   
 </div>
