@@ -1,0 +1,6 @@
+:host {
+  display: flex;
+  align-items: center;
+  height: 64px;
+  background-color: #414452;
+}

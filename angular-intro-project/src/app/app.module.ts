@@ -14,6 +14,14 @@ import { SearchAndAddSectionComponent } from './search-and-add-section/search-an
 import { SearchCourseButtonComponent } from './search-course-button/search-course-button.component';
 import { AddCourseButtonComponent } from './add-course-button/add-course-button.component';
 import { SearchCourseInputComponent } from './search-course-input/search-course-input.component';
+import { FormsModule } from '@angular/forms';
+import { HomePageComponent } from './home-page/home-page.component';
+import {Routes, RouterModule} from '@angular/router'; './component/component.component';
+import { LoadMoreComponent } from './load-more/load-more.component';
+
+const appRoutes: Routes =[
+  { path: '', component: HomePageComponent}
+];
 
 @NgModule({
   declarations: [
@@ -29,10 +37,12 @@ import { SearchCourseInputComponent } from './search-course-input/search-course-
     SearchAndAddSectionComponent,
     SearchCourseButtonComponent,
     AddCourseButtonComponent,
-    SearchCourseInputComponent
+    SearchCourseInputComponent,
+    HomePageComponent,
+    LoadMoreComponent
   ],
   imports: [
-    BrowserModule
+    BrowserModule, FormsModule, RouterModule.forRoot(appRoutes)
   ],
   providers: [],
   bootstrap: [AppComponent]

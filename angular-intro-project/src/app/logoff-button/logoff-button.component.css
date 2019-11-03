@@ -1,0 +1,6 @@
+.myClass {
+  margin-left: 20px;
+}
+.myClass:hover {
+  cursor: pointer;
+}

@@ -1,4 +1,4 @@
-<div *ngFor='let value of items'>
-  <app-course-item [item]='value'></app-course-item>
+<div class='w-75 d-flex align-items-center' *ngFor='let value of items'>
+  <app-course-item [item]='value' (itemDeleted)='onDeleted($event)'></app-course-item>
 </div>
 

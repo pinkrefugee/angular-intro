@@ -11,5 +11,4 @@ export class SearchCourseInputComponent implements OnInit {
 
   ngOnInit() {
   }
-
 }
