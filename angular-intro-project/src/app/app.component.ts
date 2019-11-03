@@ -6,16 +6,16 @@ import { Component, OnInit, DoCheck, OnChanges, AfterContentInit, AfterContentCh
   styleUrls: ['./app.component.css']
 })
 export class AppComponent implements OnInit,
-DoCheck,
-OnChanges,
-AfterContentInit, 
-AfterContentChecked, 
-AfterViewChecked, 
-AfterViewInit {
-  
+  DoCheck,
+  OnChanges,
+  AfterContentInit,
+  AfterContentChecked,
+  AfterViewChecked,
+  AfterViewInit {
+
   title = 'angular-intro-project';
 
-  ngOnInit() {    
+  ngOnInit() {
     console.log(`ngOnInit`);
   }
   ngOnChanges() {

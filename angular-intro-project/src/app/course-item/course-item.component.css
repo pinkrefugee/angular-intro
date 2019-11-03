@@ -5,7 +5,16 @@
 }
 
 .course-container {
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
     width: 100%;
     height: 150px;
     background-color: white;
+}
+
+.title-with-info {
+    display: flex;
+    justify-content: space-between;
+    width: 900px;
 }

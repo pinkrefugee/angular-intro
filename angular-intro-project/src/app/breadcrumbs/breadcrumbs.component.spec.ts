@@ -1,6 +1,7 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { BreadcrumbsComponent } from './breadcrumbs.component';
+import { By } from '@angular/platform-browser';
 
 describe('BreadcrumbsComponent', () => {
   let component: BreadcrumbsComponent;
@@ -21,5 +22,11 @@ describe('BreadcrumbsComponent', () => {
 
   it('should create', () => {
     expect(component).toBeTruthy();
+  });
+
+  it('should reflect Courses in p tag', () => {
+    const itemDe = fixture.debugElement.query(By.css('p'));
+    const itemEl = itemDe.nativeElement;
+    expect(itemEl.textContent).toEqual('Courses');
   });
 });

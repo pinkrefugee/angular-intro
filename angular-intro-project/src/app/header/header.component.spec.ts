@@ -1,6 +1,9 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { HeaderComponent } from './header.component';
+import { LogoComponent } from '../logo/logo.component';
+import { LoginButtonComponent } from '../login-button/login-button.component';
+import { LogoffButtonComponent } from '../logoff-button/logoff-button.component';
 
 describe('HeaderComponent', () => {
   let component: HeaderComponent;
@@ -8,7 +11,7 @@ describe('HeaderComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ HeaderComponent ]
+      declarations: [ HeaderComponent, LogoComponent, LoginButtonComponent, LogoffButtonComponent ]
     })
     .compileComponents();
   }));

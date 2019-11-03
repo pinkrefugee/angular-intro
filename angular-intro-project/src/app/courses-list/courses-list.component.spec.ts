@@ -1,6 +1,8 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { CoursesListComponent } from './courses-list.component';
+import { CourseItemComponent } from '../course-item/course-item.component';
+import { By } from '@angular/platform-browser';
 
 describe('CoursesListComponent', () => {
   let component: CoursesListComponent;
@@ -8,7 +10,7 @@ describe('CoursesListComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ CoursesListComponent ]
+      declarations: [ CoursesListComponent, CourseItemComponent ]
     })
     .compileComponents();
   }));
@@ -21,5 +23,10 @@ describe('CoursesListComponent', () => {
 
   it('should create', () => {
     expect(component).toBeTruthy();
+  });
+
+  it('should verify child', () => {
+    const element = fixture.debugElement.query(By.css('app-course-item'));
+    expect(element).toBeTruthy();
   });
 });

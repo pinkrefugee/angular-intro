@@ -1,13 +1,17 @@
 <div class='course-container'>
   <div class='course-info'>
-    <h3>{{item.title}}</h3>
-    {{item.creationDate}}
-    {{item.duration}}
+    <div class='title-with-info'>
+        <h3>{{item.title}}</h3>
+        <div>
+          {{item.creationDate}}
+          {{item.duration}}
+        </div>
+    </div>    
     {{item.description}}
   </div>
  <div class='course-buttons'>
    <button>Edit</button> 
-   <button (click)='deleteItem(item.id)'>Delete</button> 
+   <button class='delete-button' (click)='deleteItem(item.id)'>Delete</button> 
  </div>
   
 </div>
