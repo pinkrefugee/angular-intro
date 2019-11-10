@@ -1,10 +1,12 @@
-<div class='course-container'>
+<div [appCourseHighlight]='item.creationDate' class='course-container'>
   <div class='course-info'>
     <div class='title-with-info-and-description'>
         <h3>{{item.title}}</h3>
         <div class='info'>
-          {{item.creationDate}}
-          {{item.duration}}
+          <i class="fa fa-calendar" aria-hidden="true"></i>
+          {{item.creationDate | date : 'mediumDate'}}
+          <i class="fa fa-clock-o ml-2" aria-hidden="true"></i>
+          {{item.duration | duration}}
         </div>
     </div>    
     {{item.description}}
