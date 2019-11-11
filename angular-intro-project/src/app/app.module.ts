@@ -10,16 +10,14 @@ import { LogoComponent } from './logo/logo.component';
 import { FooterComponent } from './footer/footer.component';
 import { LoginButtonComponent } from './login-button/login-button.component';
 import { LogoffButtonComponent } from './logoff-button/logoff-button.component';
-import { SearchAndAddSectionComponent } from './search-and-add-section/search-and-add-section.component';
-import { SearchCourseButtonComponent } from './search-course-button/search-course-button.component';
+import { SearchSectionComponent } from './search-section/search-section.component';
 import { AddCourseButtonComponent } from './add-course-button/add-course-button.component';
-import { SearchCourseInputComponent } from './search-course-input/search-course-input.component';
 import { FormsModule } from '@angular/forms';
 import { HomePageComponent } from './home-page/home-page.component';
-import {Routes, RouterModule} from '@angular/router'; './component/component.component';
+import {Routes, RouterModule} from '@angular/router';
 import { LoadMoreComponent } from './load-more/load-more.component';
 
-const appRoutes: Routes =[
+const appRoutes: Routes = [
   { path: '', component: HomePageComponent}
 ];
 
@@ -34,10 +32,8 @@ const appRoutes: Routes =[
     FooterComponent,
     LoginButtonComponent,
     LogoffButtonComponent,
-    SearchAndAddSectionComponent,
-    SearchCourseButtonComponent,
+    SearchSectionComponent,
     AddCourseButtonComponent,
-    SearchCourseInputComponent,
     HomePageComponent,
     LoadMoreComponent
   ],

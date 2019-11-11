@@ -5,7 +5,33 @@
 }
 
 .course-container {
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
     width: 100%;
     height: 150px;
     background-color: white;
+}
+
+.course-info {
+    width: 70%;
+    margin-left: 50px;
+}
+
+.title-with-info-and-description {
+    display: flex;
+    justify-content: space-between;
+}
+
+.course-buttons {
+    width: 20%;
+    margin-left: 40px;
+}
+button {
+    width: 70px;
+    height: 30px;
+}
+
+.info {
+    color: lightgray;
 }
