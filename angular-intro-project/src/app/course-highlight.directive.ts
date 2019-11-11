@@ -1,4 +1,4 @@
-import { Directive, ElementRef, Input, OnInit } from '@angular/core';
+import { Directive, ElementRef, Input, OnInit, Renderer2 } from '@angular/core';
 
 @Directive({
   selector: '[appCourseHighlight]'
@@ -7,8 +7,8 @@ export class CourseHighlightDirective implements OnInit {
 
   @Input('appCourseHighlight') date: Date;
 
-  constructor(private elem: ElementRef) {
-    
+  constructor(private elem: ElementRef, private renderer: Renderer2) {
+
   }
   ngOnInit() {
     this.setStyle(this.date);
@@ -20,12 +20,13 @@ export class CourseHighlightDirective implements OnInit {
     const currentDate = new Date();
     const currentMonth = currentDate.getUTCMonth() + 1;
     const currentDay = currentDate.getUTCDate();
-    if (creationMonth*30 + creationDay < currentMonth*30 + currentDay && creationMonth*30 + creationDay >= currentMonth*30 + currentDay - 14) {
-      this.elem.nativeElement.style.cssText = "border: 1px solid green";  
+    if (creationMonth * 30 + creationDay < currentMonth * 30 + currentDay &&
+      creationMonth * 30 + creationDay >= currentMonth * 30 + currentDay - 14) {
+      this.renderer.setStyle(this.elem.nativeElement, 'border', '1px solid green');
     }
 
-    if (creationMonth*30 + creationDay > currentMonth*30 + currentDay) {
-      this.elem.nativeElement.style.cssText = "border: 1px solid DodgerBlue";  
+    if (creationMonth * 30 + creationDay > currentMonth * 30 + currentDay) {
+      this.renderer.setStyle(this.elem.nativeElement, 'border', '1px solid DodgerBlue');
     }
 
   }

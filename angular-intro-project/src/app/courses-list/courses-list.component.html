@@ -1,4 +1,10 @@
-<div class='w-75 d-flex align-items-center' *ngFor='let value of items | order'>
-  <app-course-item [item]='value' (itemDeleted)='onDeleted($event)'></app-course-item>
-</div>
+<ng-container *ngIf='items; else error'>
+  <div class='w-75 d-flex align-items-center' *ngFor='let value of items | order | filter : inputText'>
+    <app-course-item [item]='value' (itemDeleted)='onDeleted($event)'></app-course-item>
+  </div>
+</ng-container>
+<ng-template #error>
+  <p>No items!</p>
+</ng-template>
+
 

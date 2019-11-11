@@ -19,6 +19,7 @@ import { LoadMoreComponent } from './load-more/load-more.component';
 import { CourseHighlightDirective } from './course-highlight.directive';
 import { DurationPipe } from './duration.pipe';
 import { ArrayOrderPipe } from './order.pipe';
+import { SearchFilterPipe } from './search-filter.pipe';
 
 const appRoutes: Routes = [
   { path: '', component: HomePageComponent}
@@ -41,7 +42,8 @@ const appRoutes: Routes = [
     LoadMoreComponent,
     CourseHighlightDirective,
     DurationPipe,
-    ArrayOrderPipe
+    ArrayOrderPipe,
+    SearchFilterPipe
   ],
   imports: [
     BrowserModule, FormsModule, RouterModule.forRoot(appRoutes)

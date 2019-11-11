@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { InputService } from '../input.service';
 
 @Component({
   selector: 'app-search-section',
@@ -9,13 +10,13 @@ export class SearchSectionComponent implements OnInit {
   
   inputValue: string;
 
-  constructor() { }
+  constructor(private inputService: InputService) { }
 
   ngOnInit() {
   }
 
   onSearchCourseClick(): void {
-    console.log(this.inputValue);
+    this.inputService.setInputValue(this.inputValue);
   }
 
 }
