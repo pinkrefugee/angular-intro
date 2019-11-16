@@ -33,5 +33,9 @@ button {
 }
 
 .info {
-    color: lightgray;
+    color: gray;
+}
+
+.custom-background {
+    background-color: MistyRose ;
 }

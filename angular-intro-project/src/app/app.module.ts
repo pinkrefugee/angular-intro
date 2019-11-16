@@ -14,8 +14,12 @@ import { SearchSectionComponent } from './search-section/search-section.componen
 import { AddCourseButtonComponent } from './add-course-button/add-course-button.component';
 import { FormsModule } from '@angular/forms';
 import { HomePageComponent } from './home-page/home-page.component';
-import {Routes, RouterModule} from '@angular/router';
+import { Routes, RouterModule } from '@angular/router';
 import { LoadMoreComponent } from './load-more/load-more.component';
+import { CourseHighlightDirective } from './course-highlight.directive';
+import { DurationPipe } from './duration.pipe';
+import { ArrayOrderPipe } from './order.pipe';
+import { SearchFilterPipe } from './search-filter.pipe';
 
 const appRoutes: Routes = [
   { path: '', component: HomePageComponent}
@@ -35,7 +39,11 @@ const appRoutes: Routes = [
     SearchSectionComponent,
     AddCourseButtonComponent,
     HomePageComponent,
-    LoadMoreComponent
+    LoadMoreComponent,
+    CourseHighlightDirective,
+    DurationPipe,
+    ArrayOrderPipe,
+    SearchFilterPipe
   ],
   imports: [
     BrowserModule, FormsModule, RouterModule.forRoot(appRoutes)
