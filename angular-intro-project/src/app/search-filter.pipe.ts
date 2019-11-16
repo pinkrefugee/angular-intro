@@ -9,7 +9,7 @@ export class SearchFilterPipe implements PipeTransform {
     if (!items) { return []; }
     if (!searchText) { return items; }
     searchText = searchText.toLowerCase();
-    return items.filter( it => {
+    return items.filter(it => {
       return it.title.toLowerCase().includes(searchText);
     });
    }

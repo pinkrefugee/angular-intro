@@ -5,36 +5,10 @@ import { Component, OnInit, DoCheck, OnChanges, AfterContentInit, AfterContentCh
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.css']
 })
-export class AppComponent implements OnInit,
-  DoCheck,
-  OnChanges,
-  AfterContentInit,
-  AfterContentChecked,
-  AfterViewChecked,
-  AfterViewInit {
-
-  title = 'angular-intro-project';
-
+export class AppComponent implements OnInit {
+ 
   ngOnInit() {
-    console.log(`ngOnInit`);
   }
-  ngOnChanges() {
-    console.log(`OnChanges`);
-  }
-  ngDoCheck() {
-    console.log(`ngDoCheck`);
-  }
-  ngAfterViewInit() {
-    console.log(`ngAfterViewInit`);
-  }
-  ngAfterViewChecked() {
-    console.log(`ngAfterViewChecked`);
-  }
-  ngAfterContentInit() {
-    console.log(`ngAfterContentInit`);
-  }
-  ngAfterContentChecked() {
-    console.log(`ngAfterContentChecked`);
-  }
+  title = 'angular-intro-project';
 }
 

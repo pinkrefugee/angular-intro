@@ -1,1 +1,2 @@
-<p>User login</p>
+<p *ngIf='!isLogged'>User login</p>
+<p *ngIf='isLogged'>{{userName}}</p>
