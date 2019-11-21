@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { AuthService } from '../auth.service';
 
 @Component({
   selector: 'app-logoff-button',
@@ -7,13 +8,13 @@ import { Component, OnInit } from '@angular/core';
 })
 export class LogoffButtonComponent implements OnInit {
 
-  constructor() { }
+  constructor(private authService: AuthService) { }
 
   ngOnInit() {
   }
 
   onLogoutClick() {
-    console.log('Logged out');
+    this.authService.logoff();
   }
 
 }
