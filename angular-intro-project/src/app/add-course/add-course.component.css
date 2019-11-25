@@ -1,0 +1,9 @@
+:host {
+  display: flex;
+  flex-direction: column;
+  position: relative;
+  margin: 100px auto 0 auto;
+  width: 40%;
+  height: 30%;
+  background-color: white;
+}
