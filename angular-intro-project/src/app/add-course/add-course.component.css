@@ -6,4 +6,9 @@
   width: 40%;
   height: 30%;
   background-color: white;
+  padding: 20px;
+}
+
+p {
+  margin: 0;
 }

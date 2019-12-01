@@ -1,3 +1,15 @@
-<p>
-  add-course works!
-</p>
+<p>Title</p>
+<input [(ngModel)]='courseTitle' type='text' class='mb-2'>
+<p>Description</p>
+<textarea [(ngModel)]='courseDescription'></textarea>
+<p>Date</p>
+<input [(ngModel)]='courseDate' type='text' class='mb-2 w-25'>
+<p>Duration</p>
+<div class='d-flex'>
+  <input [(ngModel)]='courseDuration' type='text' class='mb-2 mr-2 w-25'>
+  <p>{{courseDuration | duration}}</p>
+</div>
+<div>
+  <button class='mr-3'>Save</button>
+  <button>Cancel</button>
+</div>
