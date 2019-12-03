@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { CoursesService } from '../courses.service';
 
 @Component({
   selector: 'app-add-course-button',
@@ -11,5 +12,4 @@ export class AddCourseButtonComponent implements OnInit {
 
   ngOnInit() {
   }
-
 }

@@ -23,9 +23,17 @@ import { SearchFilterPipe } from './search-filter.pipe';
 import { LoginPageComponent } from './login-page/login-page.component';
 import { LoginModule } from './login/login.module';
 import { AddCourseComponent } from './add-course/add-course.component';
+import { ErrorPageComponent } from './error-page/error-page.component';
+import { AuthGuard } from './auth.guard';
 
 const appRoutes: Routes = [
-  { path: '', component: HomePageComponent}
+  { path: '', redirectTo: '/courses', pathMatch: 'full'},
+  { path: 'login', component: LoginPageComponent},
+  { path: 'courses', component: HomePageComponent, canActivate: [AuthGuard]},
+  { path: 'courses/new', component: AddCourseComponent, canActivate: [AuthGuard]},
+  { path: 'courses/:id', component: AddCourseComponent, canActivate: [AuthGuard]},
+  { path: '**', component: ErrorPageComponent }
+  
 ];
 
 @NgModule({
@@ -47,7 +55,8 @@ const appRoutes: Routes = [
     DurationPipe,
     ArrayOrderPipe,
     SearchFilterPipe,
-    AddCourseComponent
+    AddCourseComponent,
+    ErrorPageComponent
   ],
   imports: [
     BrowserModule, FormsModule, RouterModule.forRoot(appRoutes), LoginModule

@@ -5,3 +5,8 @@ body {
   background-color: #f2f3f7;
   margin: 0;
 }
+
+a, a:hover {
+  color: black;
+  text-decoration: none; /* no underline */
+}

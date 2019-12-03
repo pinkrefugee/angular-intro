@@ -1,5 +1,6 @@
 import { Injectable } from '@angular/core';
 import { Course } from './course';
+import { Observable, Subject } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
@@ -9,14 +10,24 @@ export class CoursesService {
   courseItems: Array<Course> = [{id: 1, title: 'Title1', creationDate: new Date('2019, 12, 9'), duration: 120, description: this.DESCRIPTION, topRated: false},
     {id: 2, title: 'Title2', creationDate: new Date('2019, 11, 9'), duration: 130, description: this.DESCRIPTION, topRated: false},
     {id: 3, title: 'Title3', creationDate: new Date('2019, 8, 9'), duration: 59, description: this.DESCRIPTION, topRated: true}];
+    input$: Observable<any>;
+    private inputSubject = new Subject<any>();
 
-  constructor() { }
+    constructor() {
+      this.input$ = this.inputSubject.asObservable();
+    }
+    updateCrumbs(id) {
+      this.inputSubject.next(id);
+    }
 
   getItemsList(): Array<Course> {
     return this.courseItems;
   }
 
-  createCourse() {}
+  createCourse(title, description, date, duration, id?) {
+    
+
+  }
   getItemByID(id: number): Course {
     return this.courseItems.filter(item => item.id === id)[0];
   }

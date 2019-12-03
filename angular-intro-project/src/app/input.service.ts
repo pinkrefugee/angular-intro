@@ -6,13 +6,13 @@ import { Observable, Subject } from 'rxjs';
 })
 export class InputService {
   input$: Observable<any>;
-    private inputSubject = new Subject<any>();
+  private inputSubject = new Subject<any>();
 
-    constructor() {
-        this.input$ = this.inputSubject.asObservable();
-    }
+  constructor() {
+    this.input$ = this.inputSubject.asObservable();
+  }
 
-    setInputValue(data) {
-        this.inputSubject.next(data);
-    }
+  setInputValue(data) {
+    this.inputSubject.next(data);
+  }
 }
