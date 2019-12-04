@@ -22,6 +22,7 @@ import { ArrayOrderPipe } from './order.pipe';
 import { SearchFilterPipe } from './search-filter.pipe';
 import { LoginPageComponent } from './login-page/login-page.component';
 import { LoginModule } from './login/login.module';
+import { AddCourseComponent } from './add-course/add-course.component';
 
 const appRoutes: Routes = [
   { path: '', component: HomePageComponent}
@@ -45,7 +46,8 @@ const appRoutes: Routes = [
     CourseHighlightDirective,
     DurationPipe,
     ArrayOrderPipe,
-    SearchFilterPipe
+    SearchFilterPipe,
+    AddCourseComponent
   ],
   imports: [
     BrowserModule, FormsModule, RouterModule.forRoot(appRoutes), LoginModule
