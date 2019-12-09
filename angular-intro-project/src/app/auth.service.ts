@@ -1,38 +1,43 @@
 import { Injectable } from '@angular/core';
 import { Subject } from 'rxjs';
+import { HttpClient } from '@angular/common/http';
+import { Router } from '@angular/router';
 
 @Injectable({
   providedIn: 'root'
 })
 export class AuthService {
-  currentEmail: string = '';
+  token: string = '';
   nameChange: Subject<string> = new Subject<string>();
-  constructor() { }
+  constructor(private httpClient: HttpClient, private router: Router) { }
 
-  login(email: string, pass: string): void {
-    const user = {
-      pass,
-      token: '123abc'
-    };
-    const serialUser = JSON.stringify(user);
-    localStorage.setItem(email, serialUser);
-    this.currentEmail = email;
-    this.nameChange.next(this.currentEmail);
-    console.log('Logged in');
+  login(login: string, password: string): void {
+    const body = { login, password };
+    this.httpClient.post('http://localhost:3004/auth/login', body)
+      .subscribe(
+        (tokenObj) => {
+          localStorage.setItem('token', tokenObj['token']);
+          this.token = tokenObj['token'];
+          this.nameChange.next(this.token);
+          this.router.navigate(['/courses']);
+        },
+        error => console.log(error)
+      );
   }
 
   logoff(): void {
-    localStorage.removeItem(this.currentEmail);
-    this.currentEmail = '';
-    this.nameChange.next(this.currentEmail);
+    localStorage.removeItem('token');
+    this.token = '';
+    this.nameChange.next(this.token);
     console.log('Logged out');
   }
 
-  getUserInfo(): string {
-    return this.currentEmail;
+  getUserInfo() {
+    const tokenObj = { 'token': localStorage.getItem('token') };
+    return this.httpClient.post('http://localhost:3004/auth/userinfo', tokenObj);
   }
 
   isAuthenticated(): boolean {
-    return !!this.currentEmail;
+    return !!localStorage.getItem('token');
   }
 }

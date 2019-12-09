@@ -15,8 +15,6 @@ export class BreadcrumbsComponent implements OnInit {
     this.courses.input$.subscribe((data) => {
       this.courseTitle = data;
     });
-    
-  
   }
 
 

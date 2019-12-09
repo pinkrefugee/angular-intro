@@ -12,9 +12,14 @@ export class LoginButtonComponent implements OnInit {
   constructor(private authService: AuthService) { }
 
   ngOnInit() {
+    this.authService.getUserInfo().subscribe((user) => {
+      this.userName = user['name']['first'];
+    });
     this.authService.nameChange.subscribe(() => {
       this.isLogged = this.authService.isAuthenticated();
-      this.userName = this.authService.getUserInfo();
+      this.authService.getUserInfo().subscribe((user) => {
+        this.userName = user['name']['first'];
+      });
     });
   }
 

@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ChangeDetectorRef } from '@angular/core';
 import { Course } from '../course';
 import { InputService } from '../input.service';
 import { CoursesService } from '../courses.service';
@@ -10,24 +10,56 @@ import { CoursesService } from '../courses.service';
 })
 export class CoursesListComponent implements OnInit {
 
-  items: Array<Course>;
+  items: Array<Course> = [];
   inputText: string;
+  p: number = 1;
 
-  constructor(private inputService: InputService, private coursesService: CoursesService) {}
+  constructor(private inputService: InputService, private coursesService: CoursesService) { }
 
 
   ngOnInit() {
-    this.items = this.coursesService.getItemsList();
-    this.inputService.input$.subscribe((data) => {
-      this.inputText = data;
-    });
+    this.updateCourses();
+    this.coursesService.loadMore$.subscribe(
+      (data) => {
+        data.subscribe(itms => {
+          this.items.push(...itms);
+        });
+      },
+      error => console.log(error)
+    );
+    this.inputService.input$.subscribe(
+      (data) => {
+        if (!data) {
+          this.updateCourses();
+        } else {
+          this.coursesService.searchCourse(data).subscribe(itms => {
+            this.items = itms;
+          });
+        }
+      },
+      error => console.log(error)
+    );
   }
 
   onDeleted(id: number): void {
     if (confirm('Sure?')) {
-      this.coursesService.removeItem(id);
-      this.items = this.coursesService.getItemsList();
+      this.coursesService.deleteCourse(id).subscribe(
+        () => {
+          this.updateCourses();
+          this.p = 1;
+        },
+        error => console.log(error)
+      );
     }
+  }
+
+  updateCourses(): void {
+    this.coursesService.getItemsList().subscribe(
+      (itms) => {
+        this.items = [...itms];
+      },
+      error => console.log(error)
+    );
   }
 
 }

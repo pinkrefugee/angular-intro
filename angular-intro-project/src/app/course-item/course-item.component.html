@@ -1,13 +1,13 @@
-<div [appCourseHighlight]='item.creationDate' class='course-container' [ngClass]="{'custom-background' : item.topRated}">
+<div [appCourseHighlight]='false' class='course-container' [ngClass]="{'custom-background' : item.topRated}">
   <i *ngIf='item.topRated' class='fa fa-star'></i>
   <div class='course-info'>
     <div class='title-with-info-and-description'>
-        <h3>{{item.title | uppercase}}</h3>
+        <h3>{{item.name | uppercase}}</h3>
         <div class='info'>
           <i class='fa fa-calendar' aria-hidden='true'></i>
-          {{item.creationDate | date : 'mediumDate'}}
+          {{item.date | date : 'mediumDate'}}
           <i class='fa fa-clock-o ml-2' aria-hidden='true'></i>
-          {{item.duration | duration}}
+          {{item.length | duration}}
         </div>
     </div>    
     {{item.description}}
