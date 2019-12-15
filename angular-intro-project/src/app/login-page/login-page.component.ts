@@ -15,7 +15,6 @@ export class LoginPageComponent {
 
   login(): void {
     this.authService.login(this.email, this.password);
-    this.router.navigate(['/courses']);
   }
 
 }

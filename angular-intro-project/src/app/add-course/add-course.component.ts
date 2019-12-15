@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { CoursesService } from '../courses.service';
+import { Course } from '../course';
 
 @Component({
   selector: 'app-add-course',
@@ -13,6 +14,7 @@ export class AddCourseComponent implements OnInit {
   courseDate: number;
   courseDuration: number;
   id: number;
+  course: Course;
 
   constructor(private route: ActivatedRoute, private router: Router, private courses: CoursesService) { }
 
@@ -20,25 +22,38 @@ export class AddCourseComponent implements OnInit {
     this.route.params.subscribe(params => {
       this.id = +params.id;
       if (this.id) {
-        const course = this.courses.getItemByID(this.id);
-        this.populateCourseData(course);
-        this.courses.updateCrumbs(this.courseTitle);
+        this.courses.getItemByID(this.id).subscribe((item) => {
+          this.course = item;
+          this.populateCourseData(this.course);
+          this.courses.updateCrumbs(this.courseTitle);
+        });
       }
-   });
-   
+    });
   }
 
   populateCourseData(courseItem) {
-    this.courseTitle = courseItem.title;
+    this.courseTitle = courseItem.name;
     this.courseDescription = courseItem.description;
-    this.courseDate = courseItem.creationDate;
-    this.courseDuration = courseItem.duration;
+    this.courseDate = courseItem.date;
+    this.courseDuration = courseItem.length;
   }
 
-  
   createCourse() {
-    this.courses.createCourse(this.courseTitle, this.courseDescription, this.courseDate, this.courseDuration, this.id);
-    this.router.navigate(['/courses']);
+    if (this.id) {
+      this.courses.updateCourse(this.course, this.id, this.courseTitle, this.courseDescription, this.courseDate, this.courseDuration).subscribe(
+        () => {
+          this.router.navigate(['/courses']);
+        },
+        error => console.log(error)
+      );
+    } else {
+      this.courses.createCourse(this.courseTitle, this.courseDescription, this.courseDate, this.courseDuration).subscribe(
+        () => {
+          this.router.navigate(['/courses']);
+        },
+        error => console.log(error)
+      );
+    }
   }
 
   cancelClick() {

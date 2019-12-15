@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { CoursesService } from '../courses.service';
 
 @Component({
   selector: 'app-load-more',
@@ -7,13 +8,13 @@ import { Component, OnInit } from '@angular/core';
 })
 export class LoadMoreComponent implements OnInit {
 
-  constructor() { }
+  constructor(private courses: CoursesService) { }
 
   ngOnInit() {
   }
 
   onLoadMoreClick(): void {
-    console.log('clicked');
+    this.courses.loadNextChunk();
   }
 
 }

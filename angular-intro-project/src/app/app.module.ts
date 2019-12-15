@@ -25,6 +25,13 @@ import { LoginModule } from './login/login.module';
 import { AddCourseComponent } from './add-course/add-course.component';
 import { ErrorPageComponent } from './error-page/error-page.component';
 import { AuthGuard } from './auth.guard';
+import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
+import { NgxPaginationModule } from 'ngx-pagination'
+import { OwlDateTimeModule, OwlNativeDateTimeModule } from 'ng-pick-datetime';
+import { BrowserAnimationsModule} from '@angular/platform-browser/animations';
+import { TokenInterceptor } from './token.interceptor';
+
+
 
 const appRoutes: Routes = [
   { path: '', redirectTo: '/courses', pathMatch: 'full'},
@@ -59,9 +66,10 @@ const appRoutes: Routes = [
     ErrorPageComponent
   ],
   imports: [
-    BrowserModule, FormsModule, RouterModule.forRoot(appRoutes), LoginModule
+    BrowserModule, FormsModule, RouterModule.forRoot(appRoutes), LoginModule,  HttpClientModule, 
+    NgxPaginationModule, OwlDateTimeModule, OwlNativeDateTimeModule, BrowserAnimationsModule
   ],
-  providers: [],
+  providers: [{ provide: HTTP_INTERCEPTORS, useClass: TokenInterceptor, multi: true }],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

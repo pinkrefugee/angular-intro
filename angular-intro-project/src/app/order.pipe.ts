@@ -9,7 +9,7 @@ export class ArrayOrderPipe  implements PipeTransform {
     if (!array) {
       return;
     }
-    array.sort((a, b) => +a.creationDate - +b.creationDate);
+    array.sort((a, b) => new Date(b.date).getTime() - new Date(a.date).getTime());
     return array;
   }
 }
