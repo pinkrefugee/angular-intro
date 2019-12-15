@@ -14,7 +14,6 @@ export class CourseItemComponent implements OnInit {
   @Output() itemDeleted = new EventEmitter<number>();
 
   ngOnInit() {
-    this.item;
   }
 
   deleteItem(id: number): void {

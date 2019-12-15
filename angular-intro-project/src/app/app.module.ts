@@ -30,6 +30,7 @@ import { NgxPaginationModule } from 'ngx-pagination'
 import { OwlDateTimeModule, OwlNativeDateTimeModule } from 'ng-pick-datetime';
 import { BrowserAnimationsModule} from '@angular/platform-browser/animations';
 import { TokenInterceptor } from './token.interceptor';
+import { OverlayComponent } from './overlay/overlay.component';
 
 
 
@@ -63,7 +64,8 @@ const appRoutes: Routes = [
     ArrayOrderPipe,
     SearchFilterPipe,
     AddCourseComponent,
-    ErrorPageComponent
+    ErrorPageComponent,
+    OverlayComponent
   ],
   imports: [
     BrowserModule, FormsModule, RouterModule.forRoot(appRoutes), LoginModule,  HttpClientModule, 

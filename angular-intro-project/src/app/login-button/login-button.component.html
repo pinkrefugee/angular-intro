@@ -1,2 +1,2 @@
 <p *ngIf='!isLogged'>User login</p>
-<p *ngIf='isLogged'>{{userName}}</p>
+<p *ngIf='isLogged'>{{userName | async}}</p>

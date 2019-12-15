@@ -1,8 +1,9 @@
-import { Injectable, ChangeDetectorRef } from '@angular/core';
+import { localEnvironment } from './environment';
+import { Injectable } from '@angular/core';
 import { Course } from './course';
 import { Observable, Subject } from 'rxjs';
 import { HttpClient } from '@angular/common/http';
-
+import { OverlayService } from './overlay.service';
 
 @Injectable({
   providedIn: 'root'
@@ -10,13 +11,13 @@ import { HttpClient } from '@angular/common/http';
 export class CoursesService {
   courseItems: Array<Course> = [];
   input$: Observable<any>;
-  loadMore$: Observable<any>;
+  loadMore$: Observable<Course[]>;
   latestCourseNumber = 0;
   coursesPerChunk = 10;
   private inputSubject = new Subject<any>();
   private loadSubject = new Subject<any>();
 
-  constructor(private httpClient: HttpClient) {
+  constructor(private httpClient: HttpClient, private overlayService: OverlayService) {
     this.input$ = this.inputSubject.asObservable();
     this.loadMore$ = this.loadSubject.asObservable();
   }
@@ -25,22 +26,25 @@ export class CoursesService {
   }
 
   getItemsList() {
+    this.overlayService.showSpinner();
     this.latestCourseNumber = 0;
     this.coursesPerChunk = 10;
-    return this.httpClient.get<Course[]>(`http://localhost:3004/courses?start=${this.latestCourseNumber}&count=${this.coursesPerChunk}`);
+    return this.httpClient.get<Course[]>(`${localEnvironment}/courses?start=${this.latestCourseNumber}&count=${this.coursesPerChunk}`);
   }
 
   loadNextChunk() {
+    this.overlayService.showSpinner();
     this.latestCourseNumber += this.coursesPerChunk;
-    this.loadSubject.next(this.httpClient.get<Course[]>(`http://localhost:3004/courses?start=${this.latestCourseNumber}&count=${this.coursesPerChunk}`));
+    this.loadSubject.next(this.httpClient.get<Course[]>(`${localEnvironment}/courses?start=${this.latestCourseNumber}&count=${this.coursesPerChunk}`));
   }
 
   searchCourse(text) {
-    return this.httpClient.get<Course[]>(`http://localhost:3004/courses?textFragment=${text}`);
+    this.overlayService.showSpinner();
+    return this.httpClient.get<Course[]>(`${localEnvironment}/courses?textFragment=${text}`);
   }
 
   deleteCourse(id) {
-    return this.httpClient.delete<Course>(`http://localhost:3004/courses/${id}`);
+    return this.httpClient.delete<Course>(`${localEnvironment}/courses/${id}`);
   }
 
   createCourse(title, description, date, duration) {
@@ -57,7 +61,7 @@ export class CoursesService {
       },
       isTopRated: false
     };
-    return this.httpClient.post<Course>('http://localhost:3004/courses', body);
+    return this.httpClient.post<Course>(`${localEnvironment}/courses`, body);
   }
 
   updateCourse(course, id, title, description, date, duration) {
@@ -70,10 +74,10 @@ export class CoursesService {
       authors: course.authors,
       isTopRated: course.isToprated
     };
-    return this.httpClient.patch<Course>(`http://localhost:3004/courses/${id}`, body);
+    return this.httpClient.patch<Course>(`${localEnvironment}/courses/${id}`, body);
   }
 
   getItemByID(id: number) {
-    return this.httpClient.get<Course>(`http://localhost:3004/courses/${id}`);
+    return this.httpClient.get<Course>(`${localEnvironment}/courses/${id}`);
   }
 }

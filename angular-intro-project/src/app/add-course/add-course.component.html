@@ -1,9 +1,8 @@
 <p>Title</p>
 <input [(ngModel)]='courseTitle' type='text' class='mb-2'>
 <p>Description</p>
-<textarea [(ngModel)]='courseDescription'></textarea>
+<textarea class='text-area' [(ngModel)]='courseDescription'></textarea>
 <p>Date</p>
-<!-- <input [(ngModel)]='courseDate' type='text' class='mb-2 w-25'> -->
 <input [owlDateTime]="dt1" [owlDateTimeTrigger]="dt1" placeholder="Date Time" [(ngModel)]='courseDate'>
 <owl-date-time #dt1></owl-date-time>
 <p>Duration</p>
