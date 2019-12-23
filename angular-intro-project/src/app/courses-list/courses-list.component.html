@@ -1,8 +1,8 @@
 <ng-container *ngIf='items; else error'>
-  <div class='w-75 d-flex align-items-center' *ngFor='let value of items | paginate: { itemsPerPage: 5, currentPage: p } | order'>
+  <div class='w-75 d-flex align-items-center' *ngFor='let value of items | paginate: { itemsPerPage: 5, currentPage: pageNumber } | order'>
     <app-course-item [item]='value' (itemDeleted)='onDeleted($event)'></app-course-item>
   </div>
-  <pagination-controls (pageChange)="p = $event"></pagination-controls>
+  <pagination-controls (pageChange)="pageNumber = $event"></pagination-controls>
 </ng-container>
 <ng-template #error>
   <p>No items!</p>

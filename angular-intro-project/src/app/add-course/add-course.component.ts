@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { CoursesService } from '../courses.service';
 import { Course } from '../course';
+import { mergeMap } from 'rxjs/operators';
 
 @Component({
   selector: 'app-add-course',
@@ -16,19 +17,20 @@ export class AddCourseComponent implements OnInit {
   id: number;
   course: Course;
 
-  constructor(private route: ActivatedRoute, private router: Router, private courses: CoursesService) { }
+  constructor(private route: ActivatedRoute, private router: Router, private coursesService: CoursesService) { }
 
   ngOnInit() {
-    this.route.params.subscribe(params => {
+    this.route.params.pipe(mergeMap(params => {
       this.id = +params.id;
       if (this.id) {
-        this.courses.getItemByID(this.id).subscribe((item) => {
-          this.course = item;
-          this.populateCourseData(this.course);
-          this.courses.updateCrumbs(this.courseTitle);
-        });
+        return this.coursesService.getItemByID(this.id);
       }
-    });
+    })).subscribe((item) => {
+      this.course = item;
+      this.populateCourseData(this.course);
+      this.coursesService.updateCrumbs(this.courseTitle);
+    },
+      error => console.error(error));
   }
 
   populateCourseData(courseItem) {
@@ -40,14 +42,14 @@ export class AddCourseComponent implements OnInit {
 
   createCourse() {
     if (this.id) {
-      this.courses.updateCourse(this.course, this.id, this.courseTitle, this.courseDescription, this.courseDate, this.courseDuration).subscribe(
+      this.coursesService.updateCourse(this.course, this.id, this.courseTitle, this.courseDescription, this.courseDate, this.courseDuration).subscribe(
         () => {
           this.router.navigate(['/courses']);
         },
         error => console.log(error)
       );
     } else {
-      this.courses.createCourse(this.courseTitle, this.courseDescription, this.courseDate, this.courseDuration).subscribe(
+      this.coursesService.createCourse(this.courseTitle, this.courseDescription, this.courseDate, this.courseDuration).subscribe(
         () => {
           this.router.navigate(['/courses']);
         },
@@ -61,7 +63,7 @@ export class AddCourseComponent implements OnInit {
   }
 
   ngOnDestroy() {
-    this.courses.updateCrumbs(null);
+    this.coursesService.updateCrumbs(null);
   }
 
 }
