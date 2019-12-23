@@ -31,6 +31,10 @@ import { OwlDateTimeModule, OwlNativeDateTimeModule } from 'ng-pick-datetime';
 import { BrowserAnimationsModule} from '@angular/platform-browser/animations';
 import { TokenInterceptor } from './token.interceptor';
 import { OverlayComponent } from './overlay/overlay.component';
+import { StoreModule } from '@ngrx/store';
+import { loginReducer } from './login.reducer';
+import { coursesReducer } from './courses.reducer';
+import { addCourseReducer } from './add-course.reducer';
 
 
 
@@ -41,7 +45,6 @@ const appRoutes: Routes = [
   { path: 'courses/new', component: AddCourseComponent, canActivate: [AuthGuard]},
   { path: 'courses/:id', component: AddCourseComponent, canActivate: [AuthGuard]},
   { path: '**', component: ErrorPageComponent }
-  
 ];
 
 @NgModule({
@@ -65,11 +68,12 @@ const appRoutes: Routes = [
     SearchFilterPipe,
     AddCourseComponent,
     ErrorPageComponent,
-    OverlayComponent
+    OverlayComponent,
   ],
   imports: [
-    BrowserModule, FormsModule, RouterModule.forRoot(appRoutes), LoginModule,  HttpClientModule, 
-    NgxPaginationModule, OwlDateTimeModule, OwlNativeDateTimeModule, BrowserAnimationsModule
+    BrowserModule, FormsModule, RouterModule.forRoot(appRoutes), LoginModule,  HttpClientModule,
+    NgxPaginationModule, OwlDateTimeModule, OwlNativeDateTimeModule, BrowserAnimationsModule,
+    StoreModule.forRoot({ login: loginReducer, courses: coursesReducer, addCourse: addCourseReducer})
   ],
   providers: [{ provide: HTTP_INTERCEPTORS, useClass: TokenInterceptor, multi: true }],
   bootstrap: [AppComponent]

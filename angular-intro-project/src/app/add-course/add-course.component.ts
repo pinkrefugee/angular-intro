@@ -3,6 +3,8 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { CoursesService } from '../courses.service';
 import { Course } from '../course';
 import { mergeMap } from 'rxjs/operators';
+import { Store, select } from '@ngrx/store';
+import { getCourse } from '../add-course.actions';
 
 @Component({
   selector: 'app-add-course',
@@ -17,7 +19,11 @@ export class AddCourseComponent implements OnInit {
   id: number;
   course: Course;
 
-  constructor(private route: ActivatedRoute, private router: Router, private coursesService: CoursesService) { }
+  constructor(private route: ActivatedRoute, private router: Router, private coursesService: CoursesService, private store: Store<{ addCourse: Course }>) {
+    store.pipe(select('addCourse')).subscribe(val => {
+      this.course = val;
+    });
+  }
 
   ngOnInit() {
     this.route.params.pipe(mergeMap(params => {
@@ -26,7 +32,7 @@ export class AddCourseComponent implements OnInit {
         return this.coursesService.getItemByID(this.id);
       }
     })).subscribe((item) => {
-      this.course = item;
+      this.store.dispatch(getCourse({ course: item }));
       this.populateCourseData(this.course);
       this.coursesService.updateCrumbs(this.courseTitle);
     },
