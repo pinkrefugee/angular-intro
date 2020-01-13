@@ -5,6 +5,8 @@ import { InputService } from '../input.service';
 import { CoursesService } from '../courses.service';
 import { mergeMap, delay } from 'rxjs/operators';
 import { Subscription } from 'rxjs';
+import { Store, select } from '@ngrx/store';
+import { updateCourses, loadMoreCourses } from '../courses.actions';
 
 @Component({
   selector: 'app-courses-list',
@@ -19,14 +21,18 @@ export class CoursesListComponent implements OnInit {
   loadMoreSubscription: Subscription;
   searchCourseSubscription: Subscription;
 
-  constructor(private inputService: InputService, private coursesService: CoursesService, private overlayService: OverlayService) { }
+  constructor(private inputService: InputService, private coursesService: CoursesService, private overlayService: OverlayService, private store: Store<{ courses: Course[] }>) {
+    store.pipe(select('courses')).subscribe(val => {
+      this.items = val;
+    });
+   }
 
 
   ngOnInit() {
     this.updateCourses();
     this.loadMoreSubscription = this.coursesService.loadMore$.pipe(delay(2000), mergeMap(data => data)).subscribe(itms => {
       this.overlayService.hideSpinner();
-      this.items = this.items.concat(itms);
+      this.store.dispatch(loadMoreCourses({ courseItems: itms }));
     });
 
     this.searchCourseSubscription = this.inputService.input$.pipe(mergeMap(data => {
@@ -59,8 +65,8 @@ export class CoursesListComponent implements OnInit {
   updateCourses(): void {
     this.coursesService.getItemsList().pipe(delay(2000)).subscribe(
       (itms) => {
+        this.store.dispatch(updateCourses({ courseItems: itms }));
         this.overlayService.hideSpinner();
-        this.items = [...itms];
       },
       error => console.log(error)
     );
