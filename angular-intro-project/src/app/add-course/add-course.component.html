@@ -1,16 +1,31 @@
-<p>Title</p>
-<input [(ngModel)]='courseTitle' type='text' class='mb-2'>
-<p>Description</p>
-<textarea class='text-area' [(ngModel)]='courseDescription'></textarea>
-<p>Date</p>
-<input [owlDateTime]="dt1" [owlDateTimeTrigger]="dt1" placeholder="Date Time" [(ngModel)]='courseDate'>
-<owl-date-time #dt1></owl-date-time>
-<p>Duration</p>
-<div class='d-flex'>
-  <input [(ngModel)]='courseDuration' type='text' class='mb-2 mr-2 w-25'>
-  <p>{{courseDuration | duration}}</p>
-</div>
-<div>
-  <button class='mr-3' (click)='createCourse()'>Save</button>
-  <button (click)='cancelClick()'>Cancel</button>
-</div>
+<form [formGroup]='addForm'>
+  <p>Title</p>
+  <ng-container *ngIf="addForm.controls['title'].invalid && addForm.controls['title'].touched">
+    <ng-container *ngTemplateOutlet="error"></ng-container>
+  </ng-container>
+  <input formControlName='title' type='text' class='mb-2'>
+  <p>Description</p>
+  <ng-container *ngIf="addForm.controls['description'].invalid && addForm.controls['description'].touched">
+    <ng-container *ngTemplateOutlet="error"></ng-container>
+  </ng-container>
+  <textarea formControlName='description' class='text-area'></textarea>
+  <p>Date</p>
+  <ng-container *ngIf="addForm.controls['date'].invalid">
+    <ng-container *ngTemplateOutlet="error"></ng-container>
+  </ng-container>
+  <app-course-date formControlName='date' [courseDate]='courseDate'></app-course-date>
+  <p>Duration</p>
+  <ng-container *ngIf="addForm.controls['duration'].invalid">
+    <ng-container *ngTemplateOutlet="error"></ng-container>
+  </ng-container>
+  <app-course-duration formControlName='duration' [courseDuration]='courseDuration'></app-course-duration>
+  <div>
+    <button class='mr-3' (click)='createCourse()' [disabled]="addForm.invalid">Save</button>
+    <button (click)='cancelClick()'>Cancel</button>
+  </div>
+</form>
+<ng-template #error>
+  <div class="alert alert-danger m-0">
+    Not valid
+  </div>
+</ng-template>

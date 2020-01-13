@@ -5,7 +5,7 @@
         <h3>{{item.name | uppercase}}</h3>
         <div class='info'>
           <i class='fa fa-calendar' aria-hidden='true'></i>
-          {{item.date | date : 'mediumDate'}}
+          {{item.date | date}}
           <i class='fa fa-clock-o ml-2' aria-hidden='true'></i>
           {{item.length | duration}}
         </div>
@@ -16,7 +16,6 @@
    <button><a [routerLink]="['/courses', item.id]">Edit</a></button> 
    <button class='delete-button ml-2' (click)='deleteItem(item.id)'>Delete</button> 
  </div>
-  
 </div>
 
 
