@@ -12,7 +12,7 @@ import { LoginButtonComponent } from './login-button/login-button.component';
 import { LogoffButtonComponent } from './logoff-button/logoff-button.component';
 import { SearchSectionComponent } from './search-section/search-section.component';
 import { AddCourseButtonComponent } from './add-course-button/add-course-button.component';
-import { FormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HomePageComponent } from './home-page/home-page.component';
 import { Routes, RouterModule } from '@angular/router';
 import { LoadMoreComponent } from './load-more/load-more.component';
@@ -35,6 +35,8 @@ import { StoreModule } from '@ngrx/store';
 import { loginReducer } from './login.reducer';
 import { coursesReducer } from './courses.reducer';
 import { addCourseReducer } from './add-course.reducer';
+import { CourseDateComponent } from './course-date/course-date.component';
+import { CourseDurationComponent } from './course-duration/course-duration.component';
 
 
 
@@ -69,10 +71,12 @@ const appRoutes: Routes = [
     AddCourseComponent,
     ErrorPageComponent,
     OverlayComponent,
+    CourseDateComponent,
+    CourseDurationComponent,
   ],
   imports: [
     BrowserModule, FormsModule, RouterModule.forRoot(appRoutes), LoginModule,  HttpClientModule,
-    NgxPaginationModule, OwlDateTimeModule, OwlNativeDateTimeModule, BrowserAnimationsModule,
+    NgxPaginationModule, OwlDateTimeModule, OwlNativeDateTimeModule, BrowserAnimationsModule, ReactiveFormsModule,
     StoreModule.forRoot({ login: loginReducer, courses: coursesReducer, addCourse: addCourseReducer})
   ],
   providers: [{ provide: HTTP_INTERCEPTORS, useClass: TokenInterceptor, multi: true }],

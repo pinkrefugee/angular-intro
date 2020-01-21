@@ -1,12 +1,12 @@
-:host {
+form {
   display: flex;
   flex-direction: column;
   position: relative;
   margin: 100px auto 0 auto;
   width: 40%;
-  height: 40%;
+  height: 60%;
   background-color: white;
-  padding: 20px;
+  padding: 50px;
 }
 
 p {
@@ -15,4 +15,8 @@ p {
 
 .text-area {
   min-height: 100px;
+}
+
+input.ng-touched.ng-invalid {
+  border: solid red 2px;
 }

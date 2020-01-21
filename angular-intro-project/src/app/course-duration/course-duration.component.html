@@ -1,0 +1,4 @@
+<div class='d-flex'>
+  <input #durationInput type='text' class='mb-2 mr-2 w-25' (change)="onChange($event)" [value]="courseDuration">
+  <p>{{durationInput.value | duration}}</p>
+</div>
