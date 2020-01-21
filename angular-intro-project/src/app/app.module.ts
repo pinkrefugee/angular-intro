@@ -25,7 +25,7 @@ import { LoginModule } from './login/login.module';
 import { AddCourseComponent } from './add-course/add-course.component';
 import { ErrorPageComponent } from './error-page/error-page.component';
 import { AuthGuard } from './auth.guard';
-import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
+import { HttpClientModule, HTTP_INTERCEPTORS, HttpClient } from '@angular/common/http';
 import { NgxPaginationModule } from 'ngx-pagination'
 import { OwlDateTimeModule, OwlNativeDateTimeModule } from 'ng-pick-datetime';
 import { BrowserAnimationsModule} from '@angular/platform-browser/animations';
@@ -37,7 +37,8 @@ import { coursesReducer } from './courses.reducer';
 import { addCourseReducer } from './add-course.reducer';
 import { CourseDateComponent } from './course-date/course-date.component';
 import { CourseDurationComponent } from './course-duration/course-duration.component';
-
+import { TranslateLoader, TranslateModule } from '@ngx-translate/core';
+import { TranslateHttpLoader } from '@ngx-translate/http-loader';
 
 
 const appRoutes: Routes = [
@@ -77,9 +78,20 @@ const appRoutes: Routes = [
   imports: [
     BrowserModule, FormsModule, RouterModule.forRoot(appRoutes), LoginModule,  HttpClientModule,
     NgxPaginationModule, OwlDateTimeModule, OwlNativeDateTimeModule, BrowserAnimationsModule, ReactiveFormsModule,
-    StoreModule.forRoot({ login: loginReducer, courses: coursesReducer, addCourse: addCourseReducer})
+    StoreModule.forRoot({ login: loginReducer, courses: coursesReducer, addCourse: addCourseReducer}),
+    TranslateModule.forRoot({
+      loader: {
+          provide: TranslateLoader,
+          useFactory: HttpLoaderFactory,
+          deps: [HttpClient]
+      }
+  })
   ],
   providers: [{ provide: HTTP_INTERCEPTORS, useClass: TokenInterceptor, multi: true }],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
+
+export function HttpLoaderFactory(http: HttpClient) {
+  return new TranslateHttpLoader(http);
+}

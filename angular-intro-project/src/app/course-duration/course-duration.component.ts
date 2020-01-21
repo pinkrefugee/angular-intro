@@ -60,9 +60,11 @@ export class CourseDurationComponent implements OnInit, ControlValueAccessor {
   }
 
   public validate(c: FormControl) {
-    return Number.parseInt(this.data, 10) ? null : {
+    return (this.data && Number.parseInt(this.data, 10)) ? null : {
         custom: 'false',
   };
 }
 
 }
+
+

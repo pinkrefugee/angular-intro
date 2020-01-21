@@ -1,5 +1,9 @@
 <div class='ml-5'>
   <app-logo></app-logo>
+  <select class="ml-3" (change)="useLanguage($event.target.value)">
+    <option>en</option>
+    <option>de</option>
+  </select>
 </div>
 <div class='d-flex ml-auto mr-5'>
   <app-login-button></app-login-button>
